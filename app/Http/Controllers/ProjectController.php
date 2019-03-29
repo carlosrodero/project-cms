@@ -170,11 +170,11 @@ class ProjectController extends Controller
         return \Redirect::to('admin/projects');
     }
 
-    public function delete($id){
+    public function delete(Request $request){
 
-        $project = Project::findOrFail($id)->get()->first();
+        $project = Project::findOrFail($request->id);
 
-        $medias = Media::where('project_id', $id)->get();
+        $medias = Media::where('project_id', $project->id)->get();
         foreach($medias as $media){
             $file = $media->filename;
             unlink(storage_path("app/public/projects/{$project->id}/{$file}"));
