@@ -17,14 +17,10 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::delete('medias/{id}', 'ProjectController@deleteImage');
 
-    Route::get('teste', function() {
-        $project = App\Models\Project::where('id', 1)->get()-first();
-        echo $project->name;
-    });
-
-
     Route::get('pages', 'PageController@index');
     Route::get('pages/add', 'PageController@add');
+    Route::get('pages/{id}/edit', 'PageController@edit');
+    Route::patch('pages/{id}', 'PageController@update');
 
     Route::get('/', 'HomeController@index')->name('home');
 });

@@ -7,7 +7,6 @@
             <div class="card">
                 <div class="card-header">
                     Listagem de Páginas
-                    <a href="{{ url('admin/pages/add') }}" class="float-right">Adicionar Página</a>
                 </div>
 
                 <div class="card-body">
@@ -17,7 +16,34 @@
                         </div>
                     @endif
 
-                    list
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(count($pages) > 1)
+                                @foreach($pages as $page)
+                                <tr>
+                                    <th scope="row">{{ $page->id }}</th>
+                                    <td>{{ $page->name }}</td>
+                                    <td class="text-right">
+                                        <a href="{{ url('/'.$page->slug) }}" target="_blank" class="btn btn-sm btn-outline-secondary">Ver</a>
+                                        <a href="{{ url('admin/pages/'.$page->id.'/edit') }}" class="btn btn-sm btn-outline-primary">Editar</a>
+                                        <a href="" class="btn btn-sm btn-outline-danger">Excluir</a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="3" class="text-center">Nennuma página cadastrada.</td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
